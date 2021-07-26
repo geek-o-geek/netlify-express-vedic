@@ -1,12 +1,9 @@
-'use strict';
 const express = require('express');
-const serverless = require('serverless-http');
 const app = express();
-const bodyParser = require('body-parser');
+const PORT = process.env.PORT || 3000;
 
-app.use(bodyParser);
-app.post('/sendmail', (req, res) => {
-  res.json({ error: null });
+app.get('/', (req, res) => {
+  res.send('<h1>Hello world</h1>');
 });
 
-module.exports.handler = serverless(app);
+app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
