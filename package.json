@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/geek-o-geek/netlify-express-vedic#readme",
   "dependencies": {
-    "nodemon": "^2.0.12"
+    "express": "^4.17.1",
+    "nodemon": "^2.0.12",
+    "serverless-http": "^2.7.0"
   }
 }
