@@ -1,0 +1,23 @@
+{
+  "name": "vedicserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geek-o-geek/netlify-express-vedic.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/geek-o-geek/netlify-express-vedic/issues"
+  },
+  "homepage": "https://github.com/geek-o-geek/netlify-express-vedic#readme",
+  "dependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
