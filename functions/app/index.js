@@ -28,6 +28,10 @@ export default function expressApp(functionName) {
     } = req.body;
     var nodemailer = require('nodemailer');
 
+    if (!email || !name || !contact || !message) {
+      return res.status(401).send({ error: 'Mandatory fields are missing' });
+    }
+
     const transporter = nodemailer.createTransport({
       port: 465,
       host: "smtp.gmail.com",
@@ -74,6 +78,13 @@ export default function expressApp(functionName) {
           </body>
           </html`
         };
+
+        transporter.sendMail(mailOptions, function (err, info) {
+          if(err) {
+            return console.log(err);
+          }
+          res.status(200).send({ error: null });
+       });
   })
 
   // Attach logger
