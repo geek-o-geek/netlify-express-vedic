@@ -19,68 +19,61 @@ export default function expressApp(functionName) {
 
   /* define routes */
   router.get('/', (req, res) => {
-    const html = `
-    <html>
-      <head>
-        <style>
-          body {
-            padding: 30px;
-          }
-        </style>
-      </head>
-      <body>
-        <h1>Express via '${functionName}' ⊂◉‿◉つ</h1>
-
-        <p>I'm using Express running via a <a href='https://www.netlify.com/docs/functions/' target='_blank'>Netlify Function</a>.</p>
-
-        <p>Choose a route:</p>
-
-        <div>
-          <a href='/.netlify/functions/${functionName}/users'>View /users route</a>
-        </div>
-
-        <div>
-          <a href='/.netlify/functions/${functionName}/hello'>View /hello route</a>
-        </div>
-
-        <br/>
-        <br/>
-
-        <div>
-          <a href='/'>
-            Go back to demo homepage
-          </a>
-        </div>
-
-        <br/>
-        <br/>
-
-        <div>
-          <a href='https://github.com/DavidWells/netlify-functions-express' target='_blank'>
-            See the source code on github
-          </a>
-        </div>
-      </body>
-    </html>
-  `
-    res.send(html)
+    res.send('Vedic App Server')
   })
 
-  router.get('/users', (req, res) => {
-    res.json({
-      users: [
-        {
-          name: 'steve',
-        },
-        {
-          name: 'joe',
-        },
-      ],
-    })
-  })
+  router.post('/sendMail', (req, res) => {
+    const {
+      email, name, contact, message
+    } = req.body;
+    var nodemailer = require('nodemailer');
 
-  router.get('/hello/', function(req, res) {
-    res.send('hello world')
+    const transporter = nodemailer.createTransport({
+      port: 465,
+      host: "smtp.gmail.com",
+         auth: {
+              user: 'aarohanamvedic@gmail.com',
+              pass: 'Aarohanam9971',
+           },
+      secure: true,
+      });
+
+      const mailData = {
+          from: 'aarohanamvedic@gmail.com',
+          to: email,
+          subject: `Message query from ${name}`,
+          html: `<!DOCTYPE html>
+          <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width,initial-scale=1">
+              <meta name="x-apple-disable-message-reformatting">
+              <title></title>
+              <!--[if mso]>
+              <noscript>
+                  <xml>
+                      <o:OfficeDocumentSettings>
+                          <o:PixelsPerInch>96</o:PixelsPerInch>
+                      </o:OfficeDocumentSettings>
+                  </xml>
+              </noscript>
+              <![endif]-->
+              <style>
+                  table, td, div, h1, p {font-family: Arial, sans-serif;}
+                  table, td {border:2px solid #000000 !important;}
+              </style>
+          </head>
+          <body>
+          <p>
+          Hi, Please find below message from ${name}
+          </p>
+          <table>
+              <tr><td>Message</td><td>${message}</td></tr>
+              <tr><td>Contact</td><td>${contact}</td></tr>
+          </table>
+          </body>
+          </html`
+        };
   })
 
   // Attach logger
