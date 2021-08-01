@@ -20,7 +20,18 @@ export default function expressApp(functionName) {
   /* define routes */
   router.get('/', (req, res) => {
     res.send('Vedic App Server')
-  })
+  });
+
+  // Attach logger
+  app.use(morgan(customLogger))
+
+  // Setup routes
+  app.use(routerBasePath, router)
+
+  // Apply express middlewares
+  router.use(cors())
+  router.use(bodyParser.json())
+  router.use(bodyParser.urlencoded({ extended: true }))
 
   router.post('/sendMail', (req, res) => {
     const {
@@ -86,17 +97,6 @@ export default function expressApp(functionName) {
           res.status(200).send({ error: null });
        });
   })
-
-  // Attach logger
-  app.use(morgan(customLogger))
-
-  // Setup routes
-  app.use(routerBasePath, router)
-
-  // Apply express middlewares
-  router.use(cors())
-  router.use(bodyParser.json())
-  router.use(bodyParser.urlencoded({ extended: true }))
 
   return app
 }
