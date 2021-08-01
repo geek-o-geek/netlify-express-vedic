@@ -90,7 +90,7 @@ export default function expressApp(functionName) {
           </html`
         };
 
-        transporter.sendMail(mailOptions, function (err, info) {
+        transporter.sendMail(mailData, function (err, info) {
           if(err) {
             return console.log(err);
           }
