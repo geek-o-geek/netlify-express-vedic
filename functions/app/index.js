@@ -87,7 +87,7 @@ export default function expressApp(functionName) {
               <tr><td>Contact</td><td>${contact}</td></tr>
           </table>
           </body>
-          </html`
+          </html>`
         };
 
         transporter.sendMail(mailData, function (err, info) {
