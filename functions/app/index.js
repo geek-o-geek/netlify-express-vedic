@@ -54,8 +54,8 @@ export default function expressApp(functionName) {
       });
 
       const mailData = {
-          from: 'aarohanamvedic@gmail.com',
-          to: email,
+          from: email,
+          to: 'aarohanamvedic@gmail.com',
           subject: `Message query from ${name}`,
           html: `<!DOCTYPE html>
           <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
